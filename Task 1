@@ -1,0 +1,107 @@
+import 'dart:math';
+
+ int getRange(List<int?>list){
+  final List<int> list2 = list.whereType<int>().toList();
+        return list2.reduce(max)-list2.reduce(min);
+ }
+
+ String getMostTrending(List<String>list){
+     Map<String, int>mp={};
+      for(var i=0;i<list.length;i++){
+          mp.update(
+           list[i],
+          (value) => ++value,
+           ifAbsent: () => 0,
+          );
+      }
+
+       var thevalue=0;
+       var thekey;
+
+      mp.forEach((k,v){
+      if(v>thevalue) {
+        thevalue = v;
+        thekey = k;
+      }
+      });
+      return thekey;
+
+    }
+    void countMyFriends(){
+    Map<String, dynamic>data={
+    "id": 1,
+    "name": "Mohamed",
+    "age": 20,
+    "interests": ["writing", "drawing", "biking", "coding", "gaming", "singing"],
+    "friends": [
+      {
+        "id": 2,
+        "name": "Ali",
+        "age": 19,
+        "common_interests": ["drawing", "biking"]
+      },
+      {
+        "id": 3,
+        "name": "Mariam",
+        "age": 21,
+        "common_interests": ["writing"]
+      },
+      {
+        "id": 4,
+        "name": "Mishmish",
+        "age": 2,
+        "common_interests": ["singing"]
+      }
+    ]
+  };
+  print(data["friends"].length); //number of friends Mohamed has, which should be 3 according to the data
+}
+
+class Student {
+  double GPA;
+  int age;
+  String name;
+  Student({required this.name, required this.age, required this.GPA});
+}
+
+void printUs(List<Student> students) {
+   Map<String,int>mp={};
+  for(int i=0;i<students.length;i++){
+          mp.update(
+           students[i].name,
+           (value) => students[i].age,
+           ifAbsent: () => students[i].age,
+          );
+  }
+  
+  print("\n. Names after ordering by GPA (descending):");
+  var mpp = Map.fromEntries(
+    mp.entries.toList()..sort((e1, e2) => e1.value.compareTo(e2.value)));
+  print("Names after ordering by age (ascending):");
+  print(mpp.keys);
+  Map<String,double>map={};
+  for(int i=0;i<students.length;i++){
+          map.update(
+           students[i].name,
+          (value) => students[i].GPA,
+           ifAbsent: () => students[i].GPA,
+          );
+  }
+  
+  print("\n. Names after ordering by GPA (descending):");
+  var mapp = Map.fromEntries(
+    map.entries.toList()..sort((e1, e2) => e2.value.compareTo(e1.value)));
+    print(mapp.keys);
+}
+
+void main(List<String> args) {
+  List<Student> students = [
+    Student(name: "MoSalah", age: 20, GPA: 3.1),
+    Student(name: "Ashraf", age: 20, GPA: 3.2),
+    Student(name: "Mariam", age: 21, GPA: 3.9),
+    Student(name: "Rawan", age: 19, GPA: 3.8),
+    Student(name: "Anas", age: 22, GPA: 3.0),
+  ];
+
+  printUs(students);
+}
