@@ -1,0 +1,146 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body : const MyStatefulWidget(),
+      ),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyStatefulWidget> createState() => body();
+}
+
+class body extends State<MyStatefulWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(25.5),
+        child: ListView(
+            children: <Widget>[
+              AppBar(
+                backgroundColor: Colors.white,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.green),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.ac_unit, color: Colors.green),
+                    onPressed: () =>
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const setting()),
+                        ),
+                  )
+                ],
+
+              ),
+              Container(
+                child: Text('Edit profile' , style: TextStyle(fontSize: 25)),
+              ),
+              Container(
+                child: CircleAvatar(
+                  backgroundColor: Colors.green,
+                  radius: 85,
+                  child: CircleAvatar(
+                      backgroundImage: NetworkImage("https://static01.nyt.com/images/2022/09/23/multimedia/23onsoccer-neymar2-1-5679/23onsoccer-neymar2-1-5679-mediumSquareAt3X.jpg",)
+                      , radius: 80),
+                ),
+              ),
+
+              Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 25.0),
+                      child: new TextFormField(
+                        decoration: new InputDecoration(
+                            labelText: 'Name',
+                            contentPadding: new EdgeInsets.only(bottom: 1.0)),
+                        validator: (value) =>
+                        value!.isEmpty ? 'Name can\'nt be empty' : null,
+                        // onSaved: (value) => _email = value,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 25.0),
+                      child: new TextFormField(
+                        decoration: new InputDecoration(
+                            labelText: 'E-Mail',
+                            contentPadding: new EdgeInsets.only(bottom: 1.0)),
+                        validator: (value) =>
+                        value!.isEmpty ? 'Email can\'nt be empty' : null,
+                        // onSaved: (value) => _email = value,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 25.0),
+                      child: new TextFormField(
+                        decoration: new InputDecoration(
+                            labelText: 'Password',
+                            contentPadding: new EdgeInsets.only(bottom: 1.0)),
+                        obscureText: true,
+                        validator: (value) =>
+                        value!.isEmpty ? 'Password can\'nt be empty' : null,
+                        // onSaved: (value) => _password = value,
+                      ),
+                    ),
+                  ]
+
+
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.blue,
+                      onSurface: Colors.red,
+                    ),
+                    onPressed:  () { },
+                    child: Text('Save'),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.blue,
+                      onSurface: Colors.red,
+                    ),
+                    onPressed:  () { },
+                    child: Text('Cancel'),
+                  )
+                ],
+              )
+
+            ]
+        )
+    );
+  }
+}
+
+class setting extends StatelessWidget {
+  const setting({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('setting'),
+      ),
+
+    );
+  }
+}
